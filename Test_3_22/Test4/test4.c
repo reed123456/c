@@ -23,7 +23,7 @@ void game()
 		if (guess > ret)
 		{
 			if (count > 1)
-				printf("猜大了,你还有%d次机会!\n", count);
+				printf("猜大了,你还有%d次机会!\n", count - 1);
 			count--;
 		}
 		else if (guess < ret)
@@ -72,6 +72,6 @@ int main()
 			break;
 		}
 	} while (input);
-	system("pause");
+	//system("pause");
 	return 0;
 }
