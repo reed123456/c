@@ -3,12 +3,7 @@
 
 int is_leap_year(int yar)
 {
-	if ((yar % 4 == 0 && yar % 100 != 0) || (yar %400 == 0))
-	{
-		return 1;
-	}
-
-	return 0;
+	return ((yar % 4 == 0 && yar % 100 != 0) || (yar % 400 == 0));
 }
 int main()
 {
