@@ -1,7 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include <stdio.h>
-/*
-int my_strlen(char * str)
+
+//·Çµİ¹é
+int my_strlen1(char * str)
 {
 	int count = 0;
 	while (*str != '\0')
@@ -10,12 +11,13 @@ int my_strlen(char * str)
 		str++;
 	}
 	return count;
-}*/
+}
 
-int my_strlen(char * str)
+//µİ¹é
+int my_strlen2(char * str)
 {
 	if (*str != '\0')
-		return 1 + my_strlen(str+1);
+		return 1 + my_strlen2(str+1);
 	else
 		return 0;
 }
@@ -23,8 +25,14 @@ int my_strlen(char * str)
 int main()
 {
 	char arr[] = "bit";
-	int len = my_strlen(arr);
-	printf("%d\n", len);
+	
+	//µİ¹é
+	int len1 = my_strlen1(arr);
+	printf("%d\n", len1);
+
+	//·Çµİ¹é
+	int len2 = my_strlen2(arr);
+	printf("%d\n", len2);
 
 	system("pause");
 	return 0;
