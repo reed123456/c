@@ -24,15 +24,15 @@ int my_strlen2(char * str)
 
 int main()
 {
-	char arr[] = "bit";
+	char arr[] = "hello";
 	
 	//µÝ¹é
 	int len1 = my_strlen1(arr);
-	printf("%d\n", len1);
+	printf("len1 = %d\n", len1);
 
 	//·ÇµÝ¹é
 	int len2 = my_strlen2(arr);
-	printf("%d\n", len2);
+	printf("len2 = %d\n", len2);
 
 	system("pause");
 	return 0;
