@@ -8,8 +8,9 @@ int my_strlen(char * str)
 	else
 		return 0;
 }
-/*
-void reverse_string(char* arr)
+
+//·Çµİ¹é
+char * my_strrev1(char* arr)
 {
 	char *left = arr;
 	char *right = arr + my_strlen(arr) - 1;
@@ -23,9 +24,11 @@ void reverse_string(char* arr)
 		left++;
 		right--;
 	}
-}*/
+	return arr;
+}
 
-void reverse_string(char* arr)
+//µİ¹é
+void my_strrev2(char* arr)
 {
 	int len = my_strlen(arr);
 	char tmp = *arr;
@@ -33,17 +36,22 @@ void reverse_string(char* arr)
 
 	*(arr + len - 1) = '\0';
 	if (strlen(arr + 1) >= 2)
-		reverse_string(arr + 1);
+		my_strrev2(arr + 1);
 
 	*(arr + len - 1) = tmp;
 }
 
 int main()
 {
-	char arr[] = "hello bit.";
-	printf("%d\n", strlen("bit"));
-	reverse_string(arr);
-	printf("%s\n", arr);
+	char str1[] = "hello world";
+	char str2[] = "alice";
+	printf("Ô­×Ö·û´®£º%s\n", str1);
+	//my_strrev1(str1);
+	printf("  ÄæĞòºó£º%s\n", my_strrev1(str1));
+
+	printf("\nÔ­×Ö·û´®£º%s\n", str2);
+	my_strrev2(str2);
+	printf("  ÄæĞòºó£º%s\n", str2);
 	system("pause");
 	return 0;
 }
