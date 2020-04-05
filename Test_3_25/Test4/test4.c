@@ -1,10 +1,12 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include <stdio.h>
+#include <assert.h>
 
 //·ÇµÝ¹é
-int my_strlen1(char * str)
+int my_strlen1(const char * str)
 {
 	int count = 0;
+	assert(str != NULL);//¶ÏÑÔ
 	while (*str != '\0')
 	{
 		count++;
@@ -14,8 +16,9 @@ int my_strlen1(char * str)
 }
 
 //µÝ¹é
-int my_strlen2(char * str)
+int my_strlen2(const char * str)
 {
+	assert(str != NULL);//¶ÏÑÔ
 	if (*str != '\0')
 		return 1 + my_strlen2(str+1);
 	else

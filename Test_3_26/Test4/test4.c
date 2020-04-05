@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <string.h>
+#include <assert.h>
 
-int my_strlen(char * str)
+int my_strlen(const char * str)
 {
+	assert(str != NULL);//¶ÏÑÔ
 	if (*str != '\0')
 		return 1 + my_strlen(str+1);
 	else
@@ -10,10 +12,11 @@ int my_strlen(char * str)
 }
 
 //·Çµİ¹é
-char * my_strrev1(char* arr)
+char* my_strrev1(const char* str)
 {
-	char *left = arr;
-	char *right = arr + my_strlen(arr) - 1;
+	assert(str != NULL);//¶ÏÑÔ
+	char *left = str;
+	char *right = str + my_strlen(str) - 1;
 
 	while (left<right)
 	{
@@ -24,21 +27,21 @@ char * my_strrev1(char* arr)
 		left++;
 		right--;
 	}
-	return arr;
+	return str;
 }
 
 //µİ¹é
-void my_strrev2(char* arr)
+void my_strrev2(char* str)
 {
-	int len = my_strlen(arr);
-	char tmp = *arr;
-	*arr = *(arr + len - 1);
+	int len = my_strlen(str);
+	char tmp = *str;
+	*str = *(str + len - 1);
 
-	*(arr + len - 1) = '\0';
-	if (strlen(arr + 1) >= 2)
-		my_strrev2(arr + 1);
+	*(str + len - 1) = '\0';
+	if (strlen(str + 1) >= 2)
+		my_strrev2(str + 1);
 
-	*(arr + len - 1) = tmp;
+	*(str + len - 1) = tmp;
 }
 
 int main()
