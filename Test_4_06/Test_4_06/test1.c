@@ -6,10 +6,13 @@
 
 int main()
 {
-	char a = -1;
+	int a = 10;
+	int b = -10;
+	printf("%p\n", &a);
+	/*char a = -1;
 	unsigned char c = -1;
 	printf("%d\n", a);
-	printf("%d\n", c);
+	printf("%d\n", c);*/
 	/*printf("%d\n", sizeof(bool));
 	printf("%d\n", sizeof(float));
 	printf("%d\n", sizeof(double));

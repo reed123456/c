@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+//大端（存储）模式，是指数据的低位保存在内存的高地址中，而数据的高位，保存在内存的低地址中；
+//小端（存储）模式，是指数据的低位保存在内存的低地址中，而数据的高位, ，保存在内存的高地址中
 bool CheckModel()
 {
 	int i = 1;
@@ -13,11 +15,11 @@ int main()
 	int flag = CheckModel();
 	if (flag)
 	{
-		printf("这是小端模式\n");
+		printf("小端存储模式\n");
 	}
 	else
 	{
-		printf("这时大端模式\n");
+		printf("大端存储模式\n");
 	}
 	system("pause");
 	return 0;
