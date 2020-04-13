@@ -1,15 +1,15 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include <stdio.h>
 
-int main()
-{
-	int a[5][5];
-	int(*p)[4];
-	p = a;
-	printf("%p,%d\n", &p[4][2] - &a[4][2], &p[4][2] - &a[4][2]);
-	system("pause");
-	return 0;
-}
+//int main()
+//{
+//	int a[5][5];
+//	int(*p)[4];
+//	p = a;
+//	printf("%p,%d\n", &p[4][2] - &a[4][2], &p[4][2] - &a[4][2]);
+//	system("pause");
+//	return 0;
+//}
 //---------------------------------------------------
 //int main()
 //{
@@ -21,16 +21,27 @@ int main()
 //	return 0;
 //}
 //--------------------------------------------------
+int main()
+{
+	int a[4] = { 1, 2, 3, 4 };
+	int *ptr1 = (int *)(&a + 1);
+	int *ptr2 = (int *)((int)a + 1);
+	printf("%x,%x", ptr1[-1], *ptr2);//4, 2000000
+	system("pause");
+	return 0;
+}
+
 //int main()
 //{
 //	int a[4] = { 1, 2, 3, 4 };
-//	int *ptr1 = (int *)(&a + 1);
-//	int *ptr2 = (int *)((int)a + 1);
-//	printf("%x,%x", ptr1[-1], *ptr2);//4, 2000000
+//	int p = (int)a + 1;
+//	int *ptr1 = &p;
+//	int *ptr2 = (int *)(p);
+//
+//	printf("%x", *ptr2);//4, 2000000
 //	system("pause");
 //	return 0;
 //}
-
 //----------------------------------------------------
 //由于还没学习结构体，这里告知结构体的大小是20个字节
 //struct Test
