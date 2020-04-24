@@ -57,6 +57,6 @@ int main(int argc, char *argv[])
 
 	DestroyContact(&cont);
 	printf("退出通讯录系统，Good Bye......\n");
-
+	system("pause");
 	return 0;
 }
