@@ -3,16 +3,20 @@
 
 void Menu()
 {
-	printf("*************通讯录**************\n");
-	printf("*  [1] Add            [2] Del   *\n");
-	printf("*  [3] Find           [4] Modify*\n");
-	printf("*  [5] Show           [6] Clear *\n");
-	printf("*  [7] Sort           [0] Quit  *\n");
-	printf("*********************************\n");
+	printf("*********************通讯录*******************\n");
+	printf("*        [1] Add            [2] Del          *\n");
+	printf("*        [3] Find           [4] Modify       *\n");
+	printf("*        [5] Show           [6] Clear        *\n");
+	printf("*        [7] Sort           [0] Quit         *\n");
+	printf("**********************************************\n");
 }
 
 int main(int argc, char *argv[])
 {
+	system("title 通讯录管理系统");
+	system("mode con cols=46 lines=23");
+	system("color 0F");
+
 	Contact cont; //定义通讯录变量
 	InitContact(&cont);
 
@@ -24,6 +28,8 @@ int main(int argc, char *argv[])
 		scanf("%d", &select);
 		if (select == QUIT)
 			break;
+		system("cls");
+		Menu();
 		switch (select)
 		{
 		case ADD:
@@ -51,6 +57,8 @@ int main(int argc, char *argv[])
 			printf("输入选择错误，请重新输入...\n");
 			break;
 		}
+		system("pause");
+		system("cls");
 	}
 
 	SaveContact(&cont);

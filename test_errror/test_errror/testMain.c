@@ -1,117 +1,9 @@
-/*单链表(无头结点)*/
-#include"list.h"
-
-int main()
-{
-	SList mylist;
-	SListInit(&mylist);
-
-	SListNode *p;
-	ElemType item, key;
-	int select = 1;
-	int pos = 0;
-	while (select)
-	{
-		printf("*********************************************\n");
-		printf("*  [1]push_back             [2]push_front   *\n");
-		printf("*  [3]show_list             [4]pop_back     *\n");
-		printf("*  [5]pop_front             [6]insert_value *\n");
-		printf("*  [7]delete_value          [8]find_value   *\n");
-		printf("*  [9]length                [10]sort        *\n");
-		printf("*  [11]reverse              [12]clear       *\n");
-		printf("*  [13]remove_all           [0]quit_system  *\n");
-		printf("*********************************************\n");
-		printf("请选择:>");
-		scanf("%d", &select);
-		if (select == 0)
-			break;
-		switch (select)
-		{
-		case 1:
-			printf("请输入要插入的值[以-1结束]:>");
-			while (scanf("%d", &item), item != -1)
-			{
-				SListPushBack(&mylist, item);
-			}
-			printf("尾部插入数据成功...\n");
-			break;
-		case 2:
-			printf("请输入要插入的值[以-1结束]:>");
-			while (scanf("%d", &item), item != -1)
-			{
-				SListPushFront(&mylist, item);
-			}
-			printf("头部插入数据成功...\n");
-			break;
-		case 3:
-			SListShow(&mylist);
-			break;
-		case 4:
-			SListPopBack(&mylist);
-			printf("尾部删除数据成功...\n");
-			break;
-		case 5:
-			SListPopFront(&mylist);
-			printf("头部删除数据成功...\n");
-			break;
-		case 6:
-			printf("请输入要插入的位置:>");
-			scanf("%d", &pos);
-			printf("请输入要插入的数据:>");
-			scanf("%d", &item);
-			//SListInsertByPos(&mylist, pos, item);
-			break;
-		case 7:
-			printf("请输入要删除的值:>");
-			scanf("%d", &key);
-			SListDeleteByVal(&mylist, key);
-			printf("删除数据成功...\n");
-			break;
-		case 8:
-			printf("请输入要查找的值:>");
-			scanf("%d", &key);
-			p = SListFind(&mylist, key);
-			if (p == NULL)
-				printf("要查找的值不存在.\n");
-			else
-				printf("要查找的值为:> %p\n", &(p->data));
-			break;
-		case 9:
-			printf("seqlist len = %d\n", SListLength(&mylist));
-			break;
-		case 10:
-			SListSort(&mylist);
-			printf("链表排序成功......\n");
-			break;
-		case 11:
-			SListReverse(&mylist);
-			printf("链表逆序成功...\n");
-			break;
-		case 12:
-			SListClear(&mylist);
-			printf("清除数据表成功......\n");
-			break;
-		}
-	}
-	SListDestroy(&mylist);
-	printf("GoodBye......\n");
-	return 0;
-}
-
-
-//------------------------------------------------------------------------------------------------
-/*顺序表*/
-/* 
 #include "seqlist.h"
 
 int main()
 {
 	SeqList mylist;
 	SeqListInIt(&mylist);
-
-	//printf("SeqList capacity = %d\n", SeqListCapacity(&mylist));
-	//_Inc(&mylist);
-	//printf("SeqList capacity = %d\n", SeqListCapacity(&mylist));
 
 	ElemType item, key;
 	int select = 1;
@@ -199,7 +91,7 @@ int main()
 			}
 			else
 			{
-				printf("要查找的值的位置为：%d\n",pos);
+				printf("要查找的值的位置为：%d\n", pos);
 			}
 			break;
 		case 11:
@@ -233,5 +125,3 @@ int main()
 	system("pause");
 	return 0;
 }
-*/
-//------------------------------------------------------------------------------------------------

@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{0BD807AC-9264-4137-B76A-95B521E913A7}</ProjectGuid>
+    <ProjectGuid>{2FA6D562-44BF-4712-9045-162BD9683931}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>DataStruct</RootNamespace>
+    <RootNamespace>test_4_27</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -77,11 +77,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="common.h" />
-    <ClInclude Include="list.h" />
     <ClInclude Include="seqlist.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TestMain.c" />
+    <ClCompile Include="test.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

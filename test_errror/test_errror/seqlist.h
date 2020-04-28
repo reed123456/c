@@ -60,7 +60,7 @@ void SeqListInIt(SeqList *pst)
 	pst->base = (ElemType*)malloc(sizeof(ElemType)*SEQLIST_DEFAULT_SIZE);
 	assert(pst->base != NULL);
 	memset(pst->base, 0, sizeof(ElemType)*SEQLIST_DEFAULT_SIZE);
-	pst->capacity = SEQLIST_DEFAULT_SIZE;
+	pst->capacity = sizeof(ElemType)*SEQLIST_DEFAULT_SIZE;
 	pst->size = 0;
 }
 
@@ -90,7 +90,7 @@ void SeqListPushFront(SeqList *pst, ElemType x)
 	}
 	for (size_t pos = pst->size; pos > 0; --pos)
 	{
-		pst->base[pos] = pst->base[pos-1];
+		pst->base[pos] = pst->base[pos - 1];
 	}
 	pst->base[0] = x;
 	pst->size++;
@@ -249,8 +249,8 @@ void SeqListSort(SeqList *pst)
 			if (pst->base[j] > pst->base[j + 1])
 			{
 				ElemType temp = pst->base[j];
-				pst->base[j] = pst->base[j+1];
-				pst->base[j+1] = temp;
+				pst->base[j] = pst->base[j + 1];
+				pst->base[j + 1] = temp;
 			}
 		}
 	}
@@ -277,7 +277,7 @@ void SeqListReverse(SeqList *pst)
 	if (pst->size <= 1)
 		return;
 
-	int left = 0; 
+	int left = 0;
 	int right = pst->size - 1;
 	while (left < right)
 	{
@@ -296,7 +296,7 @@ size_t SeqListLength(SeqList *pst)
 size_t SeqListCapacity(SeqList *pst)
 {
 	assert(pst != NULL);
-	return pst->capacity;
+	return pst->capacity / sizeof(ElemType);
 }
 
 //清空线性表

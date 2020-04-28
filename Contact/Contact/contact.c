@@ -1,5 +1,6 @@
 #include"Contact.h"
 
+//初始话
 void InitContact(Contact *pct)
 {
 	assert(pct != NULL);
@@ -13,6 +14,7 @@ void InitContact(Contact *pct)
 	LoadContact(pct);
 }
 
+//根据姓名查找
 static int FindByName(Contact *pct, char *name)
 {
 	for (size_t i = 0; i<pct->size; ++i)
@@ -23,6 +25,7 @@ static int FindByName(Contact *pct, char *name)
 	return -1;
 }
 
+//检查容量，动态开辟内存
 static void CheckCapacity(Contact *pct)
 {
 	if (pct->size >= pct->capacity)
@@ -36,7 +39,7 @@ static void CheckCapacity(Contact *pct)
 	}
 }
 
-
+//添加联系人
 void AddContact(Contact *pct)
 {
 	assert(pct != NULL);
@@ -49,38 +52,38 @@ void AddContact(Contact *pct)
 	char  tel[12];
 	char  addr[MAX_ADDR_SIZE];
 	short age;
-	printf("姓名:>");
+	printf("请输入联系人姓名:>");
 	scanf("%s", pct->data[pct->size].name);
-	printf("性别:>");
+	printf("请输入联系人性别:>");
 	scanf("%s", pct->data[pct->size].sex);
-	printf("年龄:>");
+	printf("请输入联系人年龄:>");
 	scanf("%d", &(pct->data[pct->size].age));
-	printf("电话:>");
+	printf("请输入联系人电话:>");
 	scanf("%s", pct->data[pct->size].tel);
-	printf("住址:>");
+	printf("请输入联系人住址:>");
 	scanf("%s", pct->data[pct->size].addr);
 	pct->size++;
 	printf("新增通讯录人员信息成功......\n");
 }
 
+//显示通讯录信息
 void ShowContact(Contact *pct)
 {
 	assert(pct != NULL);
-	printf("**************************************************\n");
-	printf("*%-10s%-8s%-8s%-12s%-30s\n", "姓名", "性别", "年龄", "电话", "住址");
+	printf("-----------------联系人信息 ------------------\n");
+	printf("%-10s%-8s%-8s%-12s%-10s\n", "姓名", "性别", "年龄", "电话", "住址");
 	for (size_t i = 0; i<pct->size; ++i)
 	{
-		printf("*%-10s%-8s%-8d%-12s%-30s\n", pct->data[i].name,
+		printf("%-10s%-8s%-8d%-12s%-10s\n", pct->data[i].name,
 			pct->data[i].sex,
 			pct->data[i].age,
 			pct->data[i].tel,
 			pct->data[i].addr);
 	}
-	printf("**************************************************\n");
+	printf("---------------------------------------------\n");
 }
 
-
-
+//查找
 void FindContact(Contact *pct)
 {
 	assert(pct != NULL);
@@ -107,6 +110,8 @@ void FindContact(Contact *pct)
 		pct->data[index].tel,
 		pct->data[index].addr);
 }
+
+//删除
 void DelContact(Contact *pct)
 {
 	assert(pct != NULL);
@@ -131,6 +136,8 @@ void DelContact(Contact *pct)
 	pct->size--;
 	printf("删除成功......\n");
 }
+
+//修改
 void ModifyContact(Contact *pct)
 {
 	assert(pct != NULL);
@@ -184,6 +191,8 @@ void ModifyContact(Contact *pct)
 	}
 	printf("修改成功......\n");
 }
+
+//清空
 void ClearContact(Contact *pct)
 {
 	printf("确定要清空通讯录吗?<Y/N> :>");
@@ -220,6 +229,7 @@ void DestroyContact(Contact *pct)
 	printf("数据清理成功.....\n");
 }
 
+//保存
 void SaveContact(Contact *pct)
 {
 	FILE *fp = fopen("contact.dat", "w");
@@ -237,6 +247,7 @@ void SaveContact(Contact *pct)
 	printf("通讯录保存成功.....\n");
 }
 
+//加载文件中内容
 void LoadContact(Contact *pct)
 {
 	FILE *fp = fopen("contact.dat", "r");
