@@ -123,7 +123,7 @@ void SeqListPopFront(SeqList *pst)
 	if (IsEmpty(pst))
 	{
 		printf("顺序表为空，不能从尾部删除元素...\n");
-		return 0;
+		return;
 	}
 	for (int i = 0; i < pst->size; i++)
 	{
@@ -139,7 +139,7 @@ void SeqListInsertByPos(SeqList *pst, int pos, ElemType x)
 	if (pos < 0 || pos >pst->size)
 	{
 		printf("插入的位置非法，数据 %d 不能被插入...\n", x);
-		return 0;
+		return;
 	}
 	if (IsFull(pst) && !_Inc(pst))
 	{
@@ -185,7 +185,7 @@ void SeqListIDeleteByPos(SeqList *pst, int pos)
 	if (pos < 0 || pos >= pst->size)
 	{
 		printf("要删除的位置非法，不能按位值删除数据...\n");
-		return 0;
+		return;
 	}
 	for (int i = pos; i < pst->size; i++)
 	{
@@ -313,7 +313,7 @@ void SeqListShow(SeqList *pst)
 	if (IsEmpty(pst))
 	{
 		printf("顺序表为空...\n");
-		return 0;
+		return;
 	}
 	for (size_t i = 0; i < pst->size; ++i)
 	{

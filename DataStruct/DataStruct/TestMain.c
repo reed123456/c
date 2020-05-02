@@ -1,4 +1,103 @@
+/*双链表*/
+#include"list.h"
+
+int main()
+{
+	DCList mylist;
+	DCListInit(&mylist);
+
+	DCListNode *p;
+	ElemType item, key;
+	int select = 1;
+	int pos = 0;
+	while (select)
+	{
+		printf("*********************************************\n");
+		printf("*  [1]push_back             [2]push_front   *\n");
+		printf("*  [3]show_list             [4]pop_back     *\n");
+		printf("*  [5]pop_front             [6]insert_value *\n");
+		printf("*  [7]delete_value          [8]find_value   *\n");
+		printf("*  [9]length                [10]sort        *\n");
+		printf("*  [11]reverse              [12]clear       *\n");
+		printf("*  [0]quit_system                           *\n");
+		printf("*********************************************\n");
+		printf("请选择:>");
+		scanf("%d", &select);
+		if (select == 0)
+			break;
+		switch (select)
+		{
+		case 1:
+			printf("请输入要插入的值[以-1结束]:>");
+			while (scanf("%d", &item), item != -1)
+			{
+				DCListPushBack(&mylist, item);
+			}
+			printf("尾部插入数据成功...\n");
+			break;
+		case 2:
+			printf("请输入要插入的值[以-1结束]:>");
+			while (scanf("%d", &item), item != -1)
+			{
+				DCListPushFront(&mylist, item);
+			}
+			printf("头部插入数据成功...\n");
+			break;
+		case 3:
+			DCListShow(&mylist);
+			break;
+		case 4:
+			DCListPopBack(&mylist);
+			printf("尾部删除数据成功...\n");
+			break;
+		case 5:
+			DCListPopFront(&mylist);
+			break;
+		case 6:
+			DCListSort(&mylist);
+			printf("请输入要插入的数据:>");
+			scanf("%d", &item);
+			DCListInsertByVal(&mylist, item);
+			break;
+		case 7:
+			printf("请输入要删除的值:>");
+			scanf("%d", &key);
+			DCListDeleteByVal(&mylist, key);
+			printf("删除成功...\n");
+			break;
+		case 8:
+			printf("请输入要查找的值:>");
+			scanf("%d", &key);
+			p = DCListFind(&mylist, key);
+			if (p == NULL)
+				printf("要查找的值不存在.\n");
+			else
+				printf("要查找的值为:> %p\n", &(p->data));
+			break;
+		case 9:
+			printf("seqlist len = %d\n", DCListLength(&mylist));
+			break;
+		case 10:
+			DCListSort(&mylist);
+			printf("顺序表排序成功......\n");
+			break;
+		case 11:
+			DCListReverse(&mylist);
+			break;
+		case 12:
+			DCListClear(&mylist);
+			printf("清除数据表成功......\n");
+			break;
+		}
+	}
+	DCListDestroy(&mylist);
+	printf("GoodBye......\n");
+	return 0;
+}
+
+//------------------------------------------------------------------------------------------------
 /*单链表(无头结点)*/
+/*
 #include"list.h"
 
 int main()
@@ -19,7 +118,7 @@ int main()
 		printf("*  [7]delete_value          [8]find_value   *\n");
 		printf("*  [9]length                [10]sort        *\n");
 		printf("*  [11]reverse              [12]clear       *\n");
-		printf("*  [13]remove_all           [0]quit_system  *\n");
+		printf("*  [0]quit_system                           *\n");
 		printf("*********************************************\n");
 		printf("请选择:>");
 		scanf("%d", &select);
@@ -59,7 +158,7 @@ int main()
 			scanf("%d", &pos);
 			printf("请输入要插入的数据:>");
 			scanf("%d", &item);
-			//SListInsertByPos(&mylist, pos, item);
+			SListInsertByVal(&mylist, pos, item);
 			break;
 		case 7:
 			printf("请输入要删除的值:>");
@@ -97,7 +196,8 @@ int main()
 	printf("GoodBye......\n");
 	return 0;
 }
-
+*/
+//------------------------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------------------------
 /*顺序表*/
