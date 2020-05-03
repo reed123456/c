@@ -1,4 +1,67 @@
+#include "list.h"
+
+SList * deleteDuplication(SList *pst)
+{
+	assert(pst);
+	if (pst->head->next == NULL)
+		return pst->head;
+	SListNode *prev = NULL;
+	SListNode *p = pst->head;
+	while (p->next != NULL && p->next->data == p->data)
+	{
+		prev = p;
+		p = p->next;
+		free(prev);
+	}
+	prev = p;
+	p = p->next;
+	pst->head = p;
+	if (pst->head->next == NULL)
+		return pst->head;
+	while (p->next != NULL)
+	{
+		p = p->next;
+		if (p->next == NULL)
+			return pst->head;
+		if (p->next->data != p->data)
+		{
+			p = p->next;
+			prev = p;
+		}
+		else
+		{
+
+		}
+
+	}
+}
+int main()
+{
+	SList mylist;
+	SListInit(&mylist);
+
+	SListNode *p;
+	ElemType item, key;
+	int select = 1;
+	int pos = 0;
+	printf("请输入要插入的值[以-1结束]:>");
+	while (scanf("%d", &item), item != -1)
+	{
+		SListPushBack(&mylist, item);
+	}
+	SListShow(&mylist);
+	deleteDuplication(&mylist);
+	SListShow(&mylist);
+	SListDestroy(&mylist);
+	printf("GoodBye......\n");
+	system("pause");
+	return 0;
+}
+
+
+//------------------------------------------------------------------------------------------------
 /*双链表*/
+/*
 #include"list.h"
 
 int main()
@@ -94,7 +157,7 @@ int main()
 	printf("GoodBye......\n");
 	return 0;
 }
-
+*/
 //------------------------------------------------------------------------------------------------
 /*单链表(无头结点)*/
 /*
