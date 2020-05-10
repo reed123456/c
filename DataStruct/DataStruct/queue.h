@@ -6,6 +6,7 @@
 //顺序队列
 
 #define SEQ_QUEUE_DEFAULT_SIZE 8
+#define SEQ_QUEUE_INC_SIZE     3
 
 typedef struct SeqQueue
 {
@@ -15,6 +16,7 @@ typedef struct SeqQueue
 	int       rear;
 }SeqQueue;
 
+static bool SeqQueue_Inc(SeqQueue *psq);
 void SeqQueueInit(SeqQueue *psq);
 bool SeqQueueIsFull(SeqQueue *psq);
 bool SeqQueueIsEmpty(SeqQueue *psq);
@@ -22,6 +24,17 @@ void SeqQueueEnque(SeqQueue *psq, ElemType x);
 void SeqQueueDeque(SeqQueue *psq);
 ElemType SeqQueueFront(SeqQueue *psq);
 void SeqQueuePrint(SeqQueue *psq);
+
+//扩容
+static bool SeqQueue_Inc(SeqQueue *psq)
+{
+	ElemType *new_base = (ElemType*)realloc(psq->base, sizeof(ElemType)*(psq->capacity + SEQ_QUEUE_INC_SIZE));
+	if (new_base == NULL)
+		return false;
+	psq->base = new_base;
+	psq->capacity += SEQ_QUEUE_INC_SIZE;
+	return true;
+}
 
 //顺序表队列初始化
 void SeqQueueInit(SeqQueue *psq)
@@ -49,9 +62,9 @@ bool SeqQueueIsEmpty(SeqQueue *psq)
 void SeqQueueEnque(SeqQueue *psq, ElemType x)
 {
 	assert(psq != NULL);
-	if (SeqQueueIsFull(psq))
+	if (SeqQueueIsFull(psq) && !SeqQueue_Inc(psq))
 	{
-		printf("队列已满, %d 不能入队.\n", x);
+		printf("队列已满且扩容失败, %d 不能入队.\n", x);
 		return;
 	}
 	psq->base[psq->rear++] = x;
@@ -113,6 +126,26 @@ void CircleQueueDeque(CircleQueue *psq);
 ElemType CircleQueueFront(CircleQueue *psq);
 void CircleQueuePrint(CircleQueue *psq);
 
+//扩容
+static bool CircleQueue_Inc(SeqQueue *psq)
+{
+	ElemType *new_base = (ElemType*)realloc(psq->base, sizeof(ElemType)*(psq->capacity + CIRCLE_QUEUE_INC_SIZE));
+	if (new_base == NULL)
+		return false;
+	psq->base = new_base;
+	if (psq->front > psq->rear)
+	{
+		int temp = psq->rear;
+		psq->rear = psq->capacity;
+		for (int i = 0; i < temp; i++)
+		{
+			psq->base[psq->rear++] = psq->base[i];
+		}
+	}
+	psq->capacity += CIRCLE_QUEUE_INC_SIZE;
+	return true;
+}
+
 //初始化
 void CircleQueueInit(CircleQueue *psq)
 {
@@ -139,7 +172,7 @@ bool CircleQueueIsEmpty(CircleQueue *psq)
 void CircleQueueEnque(CircleQueue *psq, ElemType x)
 {
 	assert(psq != NULL);
-	if (CircleQueueIsFull(psq))
+	if (CircleQueueIsFull(psq) && !CircleQueue_Inc(psq))
 	{
 		printf("循环队列已满, %d 不能入队.\n", x);
 		return;
@@ -202,6 +235,8 @@ void LinkQueueInit(LinkQueue *pq);
 void LinkQueueEnQue(LinkQueue *pq, ElemType x);
 void LinkQueueDeQue(LinkQueue *pq);
 void LinkQueuePrint(LinkQueue *pq);
+bool LinkQueueEmpty(LinkQueue *pq);
+ElemType LinkQueueFront(LinkQueue *pq);
 
 //初始化
 void LinkQueueInit(LinkQueue *pq)
@@ -252,4 +287,15 @@ void LinkQueuePrint(LinkQueue *pq)
 	printf("\n");
 }
 
+bool LinkQueueEmpty(LinkQueue *pq)
+{
+	return pq->front == NULL;
+}
+
+//获取队首元素
+ElemType LinkQueueFront(LinkQueue *pq)
+{
+	assert(pq->front != NULL);
+	return pq->front->data;
+}
 #endif /* _QUEUE_H_ */

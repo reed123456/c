@@ -1,8 +1,39 @@
-#include"seqlist.h"
-#include"list.h"
-#include"stack.h"
-#include"queue.h"
+#include"tree.h"
 
+//ABC##DE##F##g#H##
+
+void main()
+{
+	//const char *str = "AB#DF###CE###";
+	const char *str = "ABC##DE##F##G#H##";
+	BinTree  bt;
+	BinTreeInit(&bt);
+	BinTreeCreate(&bt);
+	printf("VLR: ");
+	PreOrder(&bt);
+	printf("\n");
+
+	printf("LVR: ");
+	InOrder(&bt);
+	printf("\n");
+
+	printf("LRV: ");
+	PostOrder(&bt);
+	printf("\n");
+
+	printf("Level: ");
+	LevelOrder(&bt);
+	printf("\n");
+
+	printf("Size = %d\n", BinTreeCount(&bt));
+	printf("Height = %d\n", BinTreeHeight(&bt));
+	system("pause");
+	return 0;
+}
+//------------------------------------------------------------------------------------------------
+/*链队列*/
+/*
+#include"queue.h"
 void main()
 {
 	LinkQueue Q;
@@ -16,44 +47,55 @@ void main()
 	LinkQueuePrint(&Q);
 
 }
-
+*/
+//------------------------------------------------------------------------------------------------
+/*循环队列*/
 /*
 void main()
 {
-CircleQueue Q;
-CircleQueueInit(&Q);
-CircleQueueEnque(&Q, 1);
-CircleQueueEnque(&Q, 2);
-CircleQueueEnque(&Q, 3);
-CircleQueueEnque(&Q, 4);
-CircleQueueEnque(&Q, 5);
-CircleQueueEnque(&Q, 6);
-CircleQueueEnque(&Q, 7);
-CircleQueueEnque(&Q, 8);
-CircleQueueDeque(&Q);
-CircleQueueEnque(&Q, 9);
-CircleQueuePrint(&Q);
-printf("对头 = %d\n", CircleQueueFront(&Q));
+	CircleQueue Q;
+	CircleQueueInit(&Q);
+	CircleQueueEnque(&Q, 1);
+	CircleQueueEnque(&Q, 2);
+	CircleQueueEnque(&Q, 3);
+	CircleQueueEnque(&Q, 4);
+	CircleQueueEnque(&Q, 5);
+	CircleQueueEnque(&Q, 6);
+	CircleQueueEnque(&Q, 7);
+	CircleQueueEnque(&Q, 8);
+	CircleQueueDeque(&Q);
+	CircleQueueDeque(&Q);
+	CircleQueueEnque(&Q, 9);
+	CircleQueueEnque(&Q, 10);
+	CircleQueueEnque(&Q, 11);
+	CircleQueueEnque(&Q, 12);
+	CircleQueuePrint(&Q);
+	printf("对头 = %d\n", CircleQueueFront(&Q));
+	system("pause");
 }
+*/
 //------------------------------------------------------------------------------------------------
+/*顺序队列*/
 /*
 void main()
 {
-SeqQueue Q;
-SeqQueueInit(&Q);
-SeqQueueEnque(&Q, 1);
-SeqQueueEnque(&Q, 2);
-SeqQueueEnque(&Q, 3);
-SeqQueueEnque(&Q, 4);
-SeqQueueEnque(&Q, 5);
-SeqQueueEnque(&Q, 6);
-SeqQueueEnque(&Q, 7);
-SeqQueueEnque(&Q, 8);
-SeqQueueDeque(&Q);
-SeqQueueEnque(&Q, 9);
-SeqQueuePrint(&Q);
+	SeqQueue Q;
+	SeqQueueInit(&Q);
+	SeqQueueEnque(&Q, 1);
+	SeqQueueEnque(&Q, 2);
+	SeqQueueEnque(&Q, 3);
+	SeqQueueEnque(&Q, 4);
+	SeqQueueEnque(&Q, 5);
+	SeqQueueEnque(&Q, 6);
+	SeqQueueEnque(&Q, 7);
+	SeqQueueEnque(&Q, 8);
+	SeqQueueDeque(&Q);
+	SeqQueueEnque(&Q, 9);
+	SeqQueuePrint(&Q);
+	system("pause");
+	return 0;
 }
-//------------------------------------------------------------------------------------------------
+*/
 /*
 void main()
 {
