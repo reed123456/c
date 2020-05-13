@@ -1,7 +1,11 @@
 #ifndef _TREE_H_
 #define _TREE_H_
 
-#include "common.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <stdbool.h>
+#include <memory.h>
 
 #define ElemType int
 
@@ -17,168 +21,6 @@ typedef struct BinTree
 	BinTreeNode *root;
 }BinTree;
 
-#define LEVEL_ORDER
-#ifdef LEVEL_ORDER
-
-typedef struct LinkQueueNode
-{
-	BinTreeNode* data;
-	struct LinkQueueNode *link;
-}LinkQueueNode;
-
-typedef struct LinkQueue
-{
-	LinkQueueNode *front;
-	LinkQueueNode *rear;
-}LinkQueue;
-
-void LinkQueueInit(LinkQueue *pq);
-void LinkQueueEnQue(LinkQueue *pq, BinTreeNode* x);
-void LinkQueueDeQue(LinkQueue *pq);
-void LinkQueuePrint(LinkQueue *pq);
-bool LinkQueueEmpty(LinkQueue *pq);
-BinTreeNode* LinkQueueFront(LinkQueue *pq);
-
-void LinkQueueInit(LinkQueue *pq)
-{
-	assert(pq != NULL);
-	pq->front = pq->rear = NULL;
-}
-
-void LinkQueueEnQue(LinkQueue *pq, BinTreeNode* x)
-{
-	assert(pq != NULL);
-	LinkQueueNode *node = (LinkQueueNode*)malloc(sizeof(LinkQueueNode));
-	assert(node != NULL);
-	node->data = x;
-	node->link = NULL;
-
-	if (pq->front == NULL)
-		pq->front = pq->rear = node;
-	else
-	{
-		pq->rear->link = node;
-		pq->rear = node;
-	}
-}
-void LinkQueueDeQue(LinkQueue *pq)
-{
-	assert(pq != NULL);
-	if (pq->front != NULL)
-	{
-		LinkQueueNode *p = pq->front;
-		pq->front = p->link;
-		free(p);
-	}
-}
-void LinkQueuePrint(LinkQueue *pq)
-{
-	assert(pq != NULL);
-	LinkQueueNode *p = pq->front;
-	while (p != NULL)
-	{
-		printf("%d ", p->data);
-		p = p->link;
-	}
-	printf("\n");
-}
-
-bool LinkQueueEmpty(LinkQueue *pq)
-{
-	return pq->front == NULL;
-}
-
-BinTreeNode* LinkQueueFront(LinkQueue *pq)
-{
-	assert(pq->front != NULL);
-	return pq->front->data;
-}
-#endif
-
-#define ORDER_NOR
-#ifdef ORDER_NOR
-//链栈
-typedef struct LinkStackNode
-{
-	BinTreeNode *data;
-	struct LinkStackNode *link; //next
-}LinkStackNode;
-
-typedef struct LinkStack
-{
-	LinkStackNode *top;
-}LinkStack;
-
-void LinkStackInit(LinkStack *pst);
-void LinkStackPush(LinkStack *pst, BinTreeNode * x);
-void LinkStackPop(LinkStack *pst);
-BinTreeNode * LinkStackTop(LinkStack *pst);
-bool LinkStackEmpty(LinkStack *pst);
-void LinkStackPrint(LinkStack *pst);
-void LinkStackDestroy(LinkStack *pst);
-
-void LinkStackInit(LinkStack *pst)
-{
-	assert(pst != NULL);
-	pst->top = NULL;
-}
-
-void LinkStackPush(LinkStack *pst, BinTreeNode * x)
-{
-	assert(pst != NULL);
-	LinkStackNode *node = (LinkStackNode*)malloc(sizeof(LinkStackNode));
-	assert(node != NULL);
-	node->data = x;
-
-	node->link = pst->top;
-	pst->top = node;
-}
-void LinkStackPop(LinkStack *pst)
-{
-	assert(pst != NULL);
-	LinkStackNode *p = pst->top;
-	pst->top = p->link;
-
-	free(p);
-}
-BinTreeNode * LinkStackTop(LinkStack *pst)
-{
-	assert(pst != NULL);
-	if (pst->top == NULL)
-	{
-		printf("栈已空，不能出栈.\n");
-		return;
-	}
-	return pst->top->data;
-}
-void LinkStackPrint(LinkStack *pst)
-{
-	assert(pst != NULL);
-	LinkStackNode *p = pst->top;
-	while (p != NULL)
-	{
-		printf("%d\n", p->data);
-		p = p->link;
-	}
-	printf("\n");
-}
-
-void LinkStackDestroy(LinkStack *pst)
-{
-	assert(pst != NULL);
-	while (pst->top != NULL)
-	{
-		LinkStackNode *p = pst->top;
-		pst->top = p->link;
-		free(p);
-	}
-}
-
-bool LinkStackEmpty(LinkStack *pst)
-{
-	return pst->top == NULL;
-}
-#endif
 
 //初始化
 void BinTreeInit(BinTree *pbt);
@@ -198,15 +40,6 @@ void PostOrder(BinTree *bt);
 void PostOrder_1(BinTreeNode *t);
 void LevelOrder(BinTree *bt);
 void LevelOrder_1(BinTreeNode *t);
-
-//非递归遍历
-void PreOrder_NoR(BinTree *bt);
-void PreOrder_1_NoR(BinTreeNode *t);
-void InOrder_NoR(BinTree *bt);
-void InOrder_1_NoR(BinTreeNode *t);
-void PostOrder_NoR(BinTree *bt);
-void PostOrder_1_NoR(BinTreeNode *t);
-
 
 //求二叉树的节点个数以及树的高度
 int BinTreeCount(BinTree *bt);
@@ -231,7 +64,7 @@ bool BinTreeEqual_1(BinTreeNode *t1, BinTreeNode *t2);
 //摧毁二叉树
 void BinTreeDestroy(BinTree *bt);
 void BinTreeDestroy_1(BinTreeNode *t);
-//==================================================
+//===================================================================================
 
 //初始化
 void BinTreeInit(BinTree *pbt)
@@ -350,32 +183,6 @@ void PostOrder_1(BinTreeNode *t)
 		PostOrder_1(t->leftChild);
 		PostOrder_1(t->rightChild);
 		printf("%c ", t->data);
-	}
-}
-
-//层次遍历
-void LevelOrder(BinTree *bt)
-{
-	LevelOrder_1(bt->root);
-}
-void LevelOrder_1(BinTreeNode *t)
-{
-	if (t != NULL)
-	{
-		LinkQueue Q;
-		LinkQueueInit(&Q);
-
-		LinkQueueEnQue(&Q, t);
-		while (!LinkQueueEmpty(&Q))
-		{
-			BinTreeNode *p = LinkQueueFront(&Q);
-			LinkQueueDeQue(&Q);
-			printf("%c ", p->data);
-			if (p->leftChild != NULL)
-				LinkQueueEnQue(&Q, p->leftChild);
-			if (p->rightChild != NULL)
-				LinkQueueEnQue(&Q, p->rightChild);
-		}
 	}
 }
 
@@ -499,30 +306,5 @@ void BinTreeDestroy_1(BinTreeNode *t)
 	free(t);
 }
 
-
-//非递归遍历
-void PreOrder_NoR(BinTree *bt)
-{
-	PreOrder_1_NoR(bt->root);
-}
-void PreOrder_1_NoR(BinTreeNode *t)
-{
-	if (t != NULL)
-	{
-		LinkStack st;
-		LinkStackInit(&st);
-		LinkStackPush(&st, t);
-		while (!LinkStackEmpty(&st))
-		{
-			BinTreeNode *top = LinkStackTop(&st);
-			LinkStackPop(&st);
-			printf("%c ", top->data);
-			if (top->rightChild != NULL)
-				LinkStackPush(&st, top->rightChild);
-			if (top->leftChild != NULL)
-				LinkStackPush(&st, top->leftChild);
-		}
-	}
-}
 
 #endif /* _TREE_H_ */

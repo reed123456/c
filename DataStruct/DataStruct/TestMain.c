@@ -1,7 +1,33 @@
-#include"tree.h"
+#include "tree.h"
+
 
 //ABC##DE##F##g#H##
 
+void main()
+{
+	const char *VLR = "ABCDEFGH";  //VLR+LVR ==> 
+	const char *LVR = "CBEDFAGH";
+	const char *LRV = "CEFDBHGA";  //LRV+LVR ==>     //VLR + LRV ==> ?
+
+	const char *str = "ABC##DE##F##G#H##";
+	BinTree  bt;
+	BinTreeInit(&bt);
+	BinTreeCreateByStr(&bt, str);
+
+	printf("VLR: ");
+	PreOrder_NoR(&bt);
+	printf("\n");
+
+	BinTreeDestroy(&bt);
+	system("pause");
+	return 0;
+}
+
+//------------------------------------------------------------------------------------------------
+//ABC##DE##F##g#H##
+/*¶þ²æÊ÷*/
+/*
+#include"tree.h"
 void main()
 {
 	//const char *str = "AB#DF###CE###";
@@ -30,6 +56,7 @@ void main()
 	system("pause");
 	return 0;
 }
+*/
 //------------------------------------------------------------------------------------------------
 /*Á´¶ÓÁÐ*/
 /*
