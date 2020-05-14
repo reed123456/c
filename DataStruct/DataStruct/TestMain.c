@@ -1,27 +1,45 @@
-#include "tree.h"
 
-
-//ABC##DE##F##g#H##
+#include"heap.h"
 
 void main()
 {
-	const char *VLR = "ABCDEFGH";  //VLR+LVR ==> 
-	const char *LVR = "CBEDFAGH";
-	const char *LRV = "CEFDBHGA";  //LRV+LVR ==>     //VLR + LRV ==> ?
+	int ar[] = { 27, 15, 19, 18, 28, 34, 65, 49, 25, 37 };
+	int n = sizeof(ar) / sizeof(ar[0]); //
 
-	const char *str = "ABC##DE##F##G#H##";
-	BinTree  bt;
-	BinTreeInit(&bt);
-	BinTreeCreateByStr(&bt, str);
+	Heap minheap;
+	HeapInit(&minheap, n);
 
-	printf("VLR: ");
-	PreOrder_NoR(&bt);
-	printf("\n");
+	for (int i = 0; i<n; ++i)
+		MinHeapInsert(&minheap, ar[i]);
 
-	BinTreeDestroy(&bt);
-	system("pause");
-	return 0;
+	HeapPrint(&minheap);
 }
+
+
+//#include "tree.h"
+//
+//
+////ABC##DE##F##g#H##
+//
+//void main()
+//{
+//	const char *VLR = "ABCDEFGH";  //VLR+LVR ==> 
+//	const char *LVR = "CBEDFAGH";
+//	const char *LRV = "CEFDBHGA";  //LRV+LVR ==>     //VLR + LRV ==> ?
+//
+//	const char *str = "ABC##DE##F##G#H##";
+//	BinTree  bt;
+//	BinTreeInit(&bt);
+//	BinTreeCreateByStr(&bt, str);
+//
+//	printf("VLR: ");
+//	PreOrder_NoR(&bt);
+//	printf("\n");
+//
+//	BinTreeDestroy(&bt);
+//	system("pause");
+//	return 0;
+//}
 
 //------------------------------------------------------------------------------------------------
 //ABC##DE##F##g#H##
