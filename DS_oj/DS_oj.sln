@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bracket", "Bracket\Bracket.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tree", "Tree\Tree.vcxproj", "{BEB848C9-DF91-4D33-A997-DB75447E36FD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test1", "Test1\Test1.vcxproj", "{D3DE4764-0B8E-400C-A409-3DA264D7D387}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -39,6 +41,10 @@ Global
 		{BEB848C9-DF91-4D33-A997-DB75447E36FD}.Debug|Win32.Build.0 = Debug|Win32
 		{BEB848C9-DF91-4D33-A997-DB75447E36FD}.Release|Win32.ActiveCfg = Release|Win32
 		{BEB848C9-DF91-4D33-A997-DB75447E36FD}.Release|Win32.Build.0 = Release|Win32
+		{D3DE4764-0B8E-400C-A409-3DA264D7D387}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D3DE4764-0B8E-400C-A409-3DA264D7D387}.Debug|Win32.Build.0 = Debug|Win32
+		{D3DE4764-0B8E-400C-A409-3DA264D7D387}.Release|Win32.ActiveCfg = Release|Win32
+		{D3DE4764-0B8E-400C-A409-3DA264D7D387}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

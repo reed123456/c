@@ -6,8 +6,9 @@
 #include <assert.h>
 #include <stdbool.h>
 #include <memory.h>
+#include <string.h>
 
-#define ElemType int
+#define ElemType char
 
 void Swap(ElemType *a, ElemType *b)
 {
