@@ -1,4 +1,43 @@
+#include"sort.h"
 
+void main()
+{
+	int ar[] = { 49, 38, 5, 65, 97, 76, 13, 27, 49 };
+	//int ar[] = {12482, 15804, 6044, 10888, 26446, 2762, 9119, 23855, 14976, 508};
+	//int ar[] = {0, 49, 38, 65, 97, 76, 13, 27, 49}; //哨兵数据
+	int n = sizeof(ar) / sizeof(ar[0]);
+	PrintElement(ar, 0, n);
+	TestSort(ar, 0, n);
+	PrintElement(ar, 0, n);
+	TestSortEfficiency();
+}
+
+/*
+void main()
+{
+int ar[] = {0, 49, 38, 65, 97, 76, 13, 27, 49}; //哨兵数据
+int n = sizeof(ar) / sizeof(ar[0]);
+PrintElement(ar, 1, n);
+TestSort(ar, 1, n);
+PrintElement(ar, 1, n);
+//TestSortEfficiency();
+}
+/*
+void main()
+{
+//int ar[] = {49, 38, 65, 97, 76, 13, 27, 49};
+//int ar[] = {12482, 15804, 6044, 10888, 26446, 2762, 9119, 23855, 14976, 508};
+int ar[] = {0, 49, 38, 65, 97, 76, 13, 27, 49}; //哨兵数据
+int n = sizeof(ar) / sizeof(ar[0]);
+PrintElement(ar, 1, n+1);
+TestSort(ar, 0, n);
+PrintElement(ar, 0, n);
+TestSortEfficiency();
+}
+*/
+//------------------------------------------------------------------------------------------------
+/*堆*/
+/*
 #include "heap.h"
 void main()
 {
@@ -17,6 +56,7 @@ void main()
 	printf("\n");
 	system("pause");
 }
+*/
 //------------------------------------------------------------------------------------------------
 /*二叉树*/
 /*
