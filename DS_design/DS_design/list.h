@@ -30,11 +30,9 @@ typedef struct SList
 static SListNode* _Buynode(ElemType x);
 void SListInit(SList *plist);
 void SListPushBack(SList *plist, ElemType x);
-void SListPushFront(SList *plist, ElemType x);
 void SListDestroy(SList *plist);
-size_t SListLength(SList *plist);
 void SListShow(SList *plist);
-
+bool IsEmpty(SList *plist);
 
 void Addlist(SList *palist, SList *pblist);
 void SUBlist(SList *palist, SList *pblist);
@@ -80,7 +78,100 @@ void SListPushBack(SList *plist, ElemType x, ElemType index)
 	p->next = s;
 }
 
+bool IsEmpty(SList *plist)
+{
+	return plist->head == NULL;
+}
+void Addlist(SList *palist, SList *pblist)
+{
+	SListNode* pa;
+	SListNode* pb;
+	SListNode* plast;
+	SListNode* ppre = NULL;
+	SListNode* tmp;
+	if (palist == NULL)
+	{
+		palist->head = pblist->head;
+		pblist->head = NULL;
+		return;
+	}
+
+	pa = palist->head;
+	pb = pblist->head;
+
+	plast = pa;
+	if (pa->data[1] < pb->data[1])
+	{
+		pa = pb;
+		pb = plast;
+	}
+
+
+	while (plast->next != NULL && pb != NULL)
+	{
+		if (pb->data[1] == plast->data[1])
+		{
+			plast->data[0] += pb->data[0];
+			tmp = pb;
+			pb = pb->next;
+			free(tmp);
+			if (plast->data[0] == 0)
+			{
+				if (plast == pa)
+				{
+					pa = pa->next;
+					free(plast);
+					plast = pa;
+				}
+				
+				else
+				{
+					ppre->next = plast->next;
+					plast = ppre;
+				}
+
+			}
+		}
+		else if (plast->data[1] > pb->data[1] && plast->next->data[1] < pb->data[1])
+		{
+			tmp = pb;
+			pb = pb->next;
+			tmp->next = plast->next;
+			plast->next = tmp;
+			ppre = plast;
+			plast = tmp;
+		}
+		else if (plast->data[1] > pb->data[1] && plast->next->data[1] >= pb->data[1])
+		{
+			ppre = plast;
+			plast = plast->next;
+		}
+	}
+	if (pb != NULL && plast->data[1] == plast->data[1])
+	{
+		if (plast->data[1] == plast->data[1])
+		{
+			plast->data[0] += pb->data[0];
+			if (plast->data[0] == 0)
+			{
+				ppre->next = pb->next;
+				free(plast);
+				pb = NULL;
+			}
+			free(pb);
+		}
+		else 
+		{
+			plast->next = pb;
+		}
+	}
+
+	pblist->head = NULL;
+	palist->head = pa;
+}
+
 //a+b
+/*
 void Addlist(SList *palist, SList *pblist)
 {
 	SListNode* pa;
@@ -145,9 +236,16 @@ void Addlist(SList *palist, SList *pblist)
 			plast = plast->next;
 		}
 	}
+	if (pb != NULL)
+	{
+		plast->data[0] += pb->data[0];
+		free(pb);
+		pb = NULL;
+	}
+	pblist->head = pa;
 	palist->head = pa;
 }
-
+*/
 //a-b
 void Sublist(SList *palist, SList *pblist)
 {
@@ -159,22 +257,28 @@ void Sublist(SList *palist, SList *pblist)
 	}
 	Addlist(palist, pblist);
 }
+
+
 //´òÓ¡Á´±í
 void SListShow(SList *plist)
 {
 	assert(plist != NULL);
 	SListNode * p = plist->head;
+	printf("%dx^%d", p->data[0], p->data[1]);
+	p = p->next;
 	while (p != NULL)
 	{
+		if (p->data[0] > 0)
+			printf("+");
 		if (p->next == NULL)
 		{
 			if (p->data[1] == 1 || p->data[1] == 0)
 				printf("%d", p->data[0]);
 			else
-				printf("%dx^%d", p->data[0], p->data[1]);
+				printf("%dx^%d",  p->data[0], p->data[1]);
 		}
 		else
-			printf("%dx^%d + ", p->data[0], p->data[1]);
+			printf("%dx^%d", p->data[0], p->data[1]);
 		p = p->next;
 	}
 	printf("\n");

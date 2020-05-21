@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DS_design", "DS_design\DS_design.vcxproj", "{A9207FC6-FFAE-44F9-A996-AB8B38418415}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cal", "DS_design\DS_design.vcxproj", "{A9207FC6-FFAE-44F9-A996-AB8B38418415}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tree", "tree\tree.vcxproj", "{8D83799C-8D65-4571-979F-5C6542C08492}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A9207FC6-FFAE-44F9-A996-AB8B38418415}.Debug|Win32.Build.0 = Debug|Win32
 		{A9207FC6-FFAE-44F9-A996-AB8B38418415}.Release|Win32.ActiveCfg = Release|Win32
 		{A9207FC6-FFAE-44F9-A996-AB8B38418415}.Release|Win32.Build.0 = Release|Win32
+		{8D83799C-8D65-4571-979F-5C6542C08492}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8D83799C-8D65-4571-979F-5C6542C08492}.Debug|Win32.Build.0 = Debug|Win32
+		{8D83799C-8D65-4571-979F-5C6542C08492}.Release|Win32.ActiveCfg = Release|Win32
+		{8D83799C-8D65-4571-979F-5C6542C08492}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
