@@ -127,7 +127,7 @@ ElemType CircleQueueFront(CircleQueue *psq);
 void CircleQueuePrint(CircleQueue *psq);
 
 //À©ÈÝ
-static bool CircleQueue_Inc(SeqQueue *psq)
+static bool CircleQueue_Inc(CircleQueue *psq)
 {
 	ElemType *new_base = (ElemType*)realloc(psq->base, sizeof(ElemType)*(psq->capacity + CIRCLE_QUEUE_INC_SIZE));
 	if (new_base == NULL)

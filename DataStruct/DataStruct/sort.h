@@ -192,8 +192,9 @@ void TestSort(int *elem, int first, int last)
 	//InsertSort_2(elem, first, last);
 	//BinInsertSort(elem, first, last);
 	//TwoWayInsertSort(elem, first, last);
-	//ShellSort(elem, first, last);
 	SelectSort(elem, first, last);
+	//ShellSort(elem, first, last);
+	//SelectSort(elem, first, last);
 }
 
 void TestSortEfficiency()
