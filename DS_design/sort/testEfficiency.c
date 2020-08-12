@@ -1,3 +1,4 @@
+/*testEffciency.c*/
 #include"sort.h"
 
 #define MAX_Size 9
@@ -7,7 +8,7 @@ void PrintElement(int *elem, int sz);
 
 int main()
 {
-	int ar[] = { 49, 38, 5, 65, 97, 76, 13, 27, 49 };
+	int ar[MAX_Size] = { 49, 38, 5, 65, 97, 76, 13, 27, 49 };
 	int n = sizeof(ar) / sizeof(ar[0]);
 	TestSort(ar, n);
 	TestSortEfficiency();

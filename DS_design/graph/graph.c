@@ -1,83 +1,152 @@
-#include <stdio.h>  
-#include <stdlib.h>  
-#define  MaxVertices 100
-typedef struct node{   //边表 
+#include<stdio.h>
+#include<stdlib.h> 
+#define max 20
+//边表节点 
+typedef struct node{
 	int adjvex;
-	struct node* next;
-}EdgeNode;
-
-typedef struct{     //顶点表  
-	int vertex;
-	EdgeNode* edgenext;
-}VertexNode;
-
-typedef VertexNode AdjList[MaxVertices];
-
+	struct node *next;
+}eNode;
+//头节点
+typedef struct headnode{
+	char vertex;
+	eNode *firstedge;
+}hNode;
+//邻接表
 typedef struct{
-	AdjList adjlist;
-	int n, e;
-}AdjMatrix;
+	hNode adjlist[max];
+	int n, e;   //顶点数，边数 
+}linkG;
 
-void CreateGraph(AdjMatrix* G)
+//创建（邻接表） 
+linkG *creat(linkG *g, int c) //c为0表示无向图 
 {
-	int i, j, k, w, v;
-	EdgeNode *s;
-	printf("输入顶点数和边数（中间以空格分开）：");
-	scanf("%d%d", &G->n, &G->e);
-
-	printf("建立顶点表\n");
-	for (i = 0; i<G->n; i++)
+	int i, j, k;
+	eNode *s;
+	int n1, e1;
+	char ch;
+	g = (linkG *)malloc(sizeof(linkG));
+	printf("请输入顶点数及边数: ");
+	scanf("%d%d", &n1, &e1);
+	g->n = n1; g->e = e1;
+	printf("请输入顶点信息：");
+	getchar();
+	for (i = 0; i<n1; i++)
 	{
-		getchar();
-		printf("请输入第%d个顶点的信息:", i + 1);
-		G->adjlist[i].vertex = getchar();
-		G->adjlist[i].edgenext = NULL;
+		scanf("%c", &ch);
+		g->adjlist[i].vertex = ch;
+		g->adjlist[i].firstedge = NULL;
 	}
-	//前插法 
-	printf("建立边表\n");
-	for (k = 0; k<G->e; k++)
+	getchar();
+	int i1, j1;
+	for (k = 0; k<e1; k++)
 	{
-		printf("输入有连接的顶点序号：");
-		scanf("%d%d", &i, &j);
-		i -= 1; j -= 1;//①
-		 
-		s = (EdgeNode*)malloc(sizeof(EdgeNode));
-		s->adjvex = j;//边表赋值 
-		s->next = G->adjlist[i].edgenext;
-		G->adjlist[i].edgenext = s;
-		
-		s = (EdgeNode*)malloc(sizeof(EdgeNode));
-		s->adjvex = i;
-		s->next = G->adjlist[j].edgenext;
-		G->adjlist[j].edgenext = s;
-	}
-}
-void DispGraph(AdjMatrix *G)
-{
-	int i;
-	for (i = 0; i<G->n; i++)
-	{
-		printf("%d->", i + 1);
-		while (1)
+		printf("请输入对（i,j）: ");
+		scanf("%d%d", &i1, &j1);
+		s = (eNode *)malloc(sizeof(eNode));
+		s->adjvex = j1;
+		s->next = g->adjlist[i1].firstedge;
+		g->adjlist[i1].firstedge = s;
+		if (c == 0)
 		{
-			if (G->adjlist[i].edgenext == NULL)
-			{
-				printf("^");
-				break;
-			}
-			printf("%d->", G->adjlist[i].edgenext->adjvex + 1);
-			//② 
-			G->adjlist[i].edgenext = G->adjlist[i].edgenext->next;
-
+			s = (eNode *)malloc(sizeof(eNode));
+			s->adjvex = i1;
+			s->next = g->adjlist[j1].firstedge;
+			g->adjlist[j1].firstedge = s;
+		}
+	}
+	//-------------------------------------------
+	//打印邻接表
+	printf("\n邻接表为:\n");
+	for (i = 0; i<g->n; i++){
+		s = g->adjlist[i].firstedge;
+		while (s){
+			printf("(%c,%c)", g->adjlist[i].vertex, g->adjlist[s->adjvex].vertex);
+			s = s->next;
 		}
 		printf("\n");
 	}
+
+
+	////----------------------------------------------
+	return g;
 }
+
+int visited[max]; //标记是否访问 
+
+//深度优先遍历DFS
+void dfs(linkG *g, int i) //顶点i
+{
+	eNode *p;
+	printf("%c ", g->adjlist[i].vertex);
+	visited[i] = 1;
+	p = g->adjlist[i].firstedge;
+	while (p)
+	{
+		if (!visited[p->adjvex])
+			dfs(g, p->adjvex);
+		p = p->next;
+	}
+
+}
+
+void dfstravel(linkG *g)
+{
+	int i;
+	for (i = 0; i<g->n; i++)
+		visited[i] = 0;
+	for (i = 0; i<g->n; i++)
+	if (!visited[i])
+		dfs(g, i);
+}
+
+//广度优先遍历BFS
+void bfs(linkG *g, int i)
+{
+	int j;
+	eNode *p;
+	int q[max], front, rear;
+	front = rear = 0;
+	printf("%c ", g->adjlist[i].vertex);
+	visited[i] = 1;
+	q[rear++] = i;
+	while (rear>front)
+	{
+		j = q[front++];
+		p = g->adjlist[j].firstedge;
+		while (p)
+		{
+			if (visited[p->adjvex] == 0)
+			{
+				printf("%c ", g->adjlist[p->adjvex].vertex);
+				q[rear++] = p->adjvex;
+				visited[p->adjvex] = 1;
+			}
+			p = p->next;
+		}
+	}
+}
+
+void bfstravel(linkG *g)
+{
+	int i, count = 0;
+	for (i = 0; i<g->n; i++)
+		visited[i] = 0;
+	for (i = 0; i<g->n; i++)
+	if (!visited[i])
+		bfs(g, i);
+}
+
+//主函数 
 int main()
 {
-	AdjMatrix* G = (AdjMatrix*)malloc(sizeof(AdjMatrix));
-	CreateGraph(G);
-	DispGraph(G);
+	linkG *g = NULL;
+	g = creat(g, 0);
+	printf("\nDFS：");
+	dfstravel(g);
+	printf("\nBFS：");
+	bfstravel(g);
+	printf("\n");
+
 	system("pause");
 	return 0;
 }
